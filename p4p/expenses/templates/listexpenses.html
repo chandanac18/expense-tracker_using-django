@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    </head>
+<body class="container mt-4">
+    <h2 class="text-center mb-4">Expense Tracker</h2>
+    <a href="{% url 'add_expense' %}" class="btn btn-primary mb-3">Add Expenses</a>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Title</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td>{{ expense.title }}</td>
+                <td>{{ expense.amount }}</td>
+                <td>{{ expense.date }}</td>
+                <td>
+                    <a href="{% url 'update_expense' expense.pk %}" class="btn btn-warning btn-small">Update</a>
+                    <a href="{% url 'delete_expense' expense.pk %}" class="btn btn-danger btn-small">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
